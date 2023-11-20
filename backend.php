@@ -15,9 +15,11 @@
     $sql_fuel_p = "Select price from `fuel_price` where fuel ='Petrol'";
     $row_p=mysqli_fetch_assoc(mysqli_query($conn,$sql_fuel_p));
     $petrol_p = $row_p['price'];
+    // echo($petrol_p);
     $sql_fuel_d = "Select price from `fuel_price` where fuel ='Diesel'";
     $row_d=mysqli_fetch_assoc(mysqli_query($conn,$sql_fuel_d));
     $desile_p =$row_d['price'];
+    // echo($desile_p);
     $value=0;
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $rfid =$_POST["rfid"];
@@ -25,7 +27,7 @@
         $result = mysqli_query($conn,$sql);
         if(mysqli_num_rows($result)==1){
             $row=mysqli_fetch_assoc($result);
-            // echo($row['RFID_no']);
+           
            if($row['req_fuel'] != 0 && $row['req_fuel_amnt'] == 0){
             if($row['Fuel_used'] == "Petrol"){
                 $value = $petrol_p*$row['req_fuel'];
