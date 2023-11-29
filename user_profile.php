@@ -18,10 +18,12 @@
     }
     include("db.php");
     $user= $_SESSION['username1'];
+    // echo($user);
     $sql = "Select * from `registration` where Reg_no = '$user'";
     $result = mysqli_query($conn,$sql);
     $row = mysqli_fetch_assoc($result);
     $name = $row['Name'];
+    $_SESSION['name'] = $name;
     $phone=$row['Phone'];
     $Email = $row['Email'];
     $RFID_no = $row['RFID_no'];

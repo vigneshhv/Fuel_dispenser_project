@@ -8,6 +8,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $sql= "update documents set File_status='$status',verified_date= current_timestamp() where file_name='$file_name'and Reg_no='$Reg_no' ";
     $result=mysqli_query($conn,$sql);
     echo("Success");
+    header("Location:documents_verification.php");
     
 }
 ?>

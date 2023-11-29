@@ -1,31 +1,31 @@
 <?php
 
-// // API endpoint
-// $apiEndpoint = 'http://192.168.1.38/handle_post';
+// API endpoint
+$apiEndpoint = 'http://192.168.1.38/handle_post';
 
-// // Data to be sent in the POST request
-// $postData = array(
-//     'param1' => 'value1',
-//     'param2' => 'value2'
-// );
+// Data to be sent in the POST request
+$postData = array(
+    'param1' => 'value1',
+    'param2' => 'value2'
+);
 
-// // Create HTTP headers
-// $options = array(
-//     'http' => array(
-//         'method'  => 'POST',
-//         'header'  => 'Content-type: text/plain',
-//         'content' => http_build_query($postData)
-//     )
-// );
+// Create HTTP headers
+$options = array(
+    'http' => array(
+        'method'  => 'POST',
+        'header'  => 'Content-type: text/plain',
+        'content' => http_build_query($postData)
+    )
+);
 
-// // Create stream context with HTTP headers
-// $context = stream_context_create($options);
+// Create stream context with HTTP headers
+$context = stream_context_create($options);
 
-// // Make the POST request and store the result
-// file_get_contents($apiEndpoint, false, $context);
+// Make the POST request and store the result
+file_get_contents($apiEndpoint, false, $context);
 
-// // Process $result as needed
-// // echo $result;
+// Process $result as needed
+// echo $result;
 ?>
 <!DOCTYPE html>
 <html lang="en">

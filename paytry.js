@@ -1,8 +1,8 @@
 function updateStatus(amt , uname) {
-// console.log(amount,challan_id);
+console.log(amount,challan_id);
 amt = amt*100;
 var options = {
-    // key: "rzp_test_ed8WeGcGzOe4x5",
+    key: "rzp_test_ed8WeGcGzOe4x5",
     amount: amt,
     currency: "INR",
     name: "Smart Fuel Station",
