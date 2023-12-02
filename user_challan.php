@@ -8,25 +8,64 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <!-- <script src="paytry.js"></script> -->
     <title>challan</title>
-    <h1>Challans</h1>
+    <!-- <h1>Challans</h1> -->
 </head>
 <body>
 <style>
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
-    margin-top:20px;
-  }
   
-  th, td {
+.main-content {
+  padding:20px;
+    margin-left: 230px;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.input-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.details {
+    font-size: 18px;
+    font-weight: bold;
+}
+   /* Add a box shadow to input boxes */
+ .input-box {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        padding: 6px;
+        border-radius: 5px;
+    }
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 15px;
     text-align: left;
-    padding: 16px;
-  }
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
+    border: 1px solid #ddd;
+}
+
+.h1{
+  padding: 10px;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+    background-color: #ecf0f1;
+}
+
 </style>
     
 <?php
@@ -42,7 +81,7 @@
     $user= $_SESSION['username1'];
     // echo($user);
     include('db.php');
-
+    include('nav.php');
     $sql = "Select account_balance,name from registration where Reg_no = '$user'";
     $result = mysqli_query($conn,$sql);
     $row = mysqli_fetch_array($result);
@@ -50,31 +89,28 @@
     $name = $row['name'];
 
     ?>
-             <div class="input-box">
-                    <span class="details">Full Name <?php
-                    echo ": $name";?></span>
-                </div>
-                <div class="input-box">
-                    <span class="details">Registration Number <?php
-                    echo ": $user";?></span>
-                </div>
-                <div class="input-box">
-                    <span class="details"> Account Balance<?php
-                    echo ": $account_balance";?></span>
-                </div>
-                <table style="width:100%">
-                        <tr>
-                            <th>SL No.</th>
-                            <th>Challan Id</th>
-                            <th>Issue Date</th>
-                            <th>Challan Type</th>
-                            <th>Challan Reason</th>
-                            <th>Payable Amount</th>
-    
-                            <th>Payment</th>
+    <div class ="main-content">
+    <div class = "container">
+   
+                <h1> Pay Challan</h1>
+               
+                <table class="table table-primary">
+                <thead>
+                           
+                            <th scope="col">SL No.</th>
+                            <th scope="col">Challan</th>
+                            <th scope="col">Issue Date</th>
+                            <th scope ="col">Challan Type</th>
+                            <th scope ="col">Challan Reason</th>
+                            <th scope ="col">Payable Amount</th>
+                               <th scope ="col">Payment</th>
                             
-                        </tr>
-                </table>
+     
+                            
+                        
+                            </tr>
+                </thead>
+                <tbody>
                 <?php
 
                 $sql_challan = "SELECT * FROM challan where Reg_no='$user'";
@@ -85,8 +121,8 @@
                 while($row=mysqli_fetch_assoc($result)){
                     if($row['Status']==0){
                         echo("
-                        <table>
                         <tr>
+                        
                         <td>".$count."</td>
                         <td>".$row['Challan_Id']."</td>
                         <td>".$row['challan_ date']."</td>
@@ -95,27 +131,29 @@
                         <td>".$row['Ammount']."</td>
                        
                         <td><button type ='submit'  onclick=\"updateStatus('".$row['Ammount']."', '".$row['Challan_Id']."')\">Pay</button></td>
-                    </tr>   </table>");
+                    </tr>   ");
                     $count++;
                     }
                   }
                 }
   ?>
+    </tbody>
+</table>
   <h1>Payed challans</h1>
-     <table  style="width:100%">
-                        <tr>
-                            <th>SL No.</th>
-                            <th>Challan Id</th>
-                            <th>Issue Date</th>
-                            <th>Challan Type</th>
-                            <th>Challan Reason</th>
-                            <th> Amount payed</th>
+  <table class="table table-primary">
+                <thead>
+                            <th scope = "col">SL No.</th>
+                            <th scope = "col">Challan Id</th>
+                            <th scope = "col">Issue Date</th>
+                            <th scope = "col">Challan Type</th>
+                            <th scope = "col">Challan Reason</th>
+                            <th scope = "col"> Amount payed</th>
     
-                            <th>Payment Date</th>
+                            <th scope = "col">Payment Date</th>
                             
-                        </tr>
-                </table>
-
+                            </tr>
+                </thead>
+                <tbody>
 
 <?php
   $count=1;
@@ -124,8 +162,8 @@
    
    while( $row1 =mysqli_fetch_assoc($result1)){
     echo("
-    <table>
     <tr>
+    <th scope='row'>".$count."</th>
     <td>".$count."</td>
     <td>".$row1['Challan_Id']."</td>
     <td>".$row1['challan_ date']."</td>
@@ -134,10 +172,14 @@
     <td>".$row1['Ammount']."</td>
     <td>".$row1['amount_date']."</td>
     
-</tr>   </table>");
+</tr>   ");
+
 $count++;
    }?>
-
+     </tbody>
+</table>
+</div>
+</div>
 <script>
   function updateStatus(amt , uname) {
 // console.log(amount,challan_id);

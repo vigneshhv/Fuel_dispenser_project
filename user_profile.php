@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>profile</title>
-    <h1> Profoile Section</h1>
+    <!-- <h1> Profoile Section</h1> -->
+   
 </head>
 <body>
     <?php
-    
+   
     session_start();
     
     if(!isset($_SESSION['user'])||$_SESSION['user']!= true ){
-       header("location:index.php"); 
+       header("location:user_login.php"); 
        exit();
        
     }
     include("db.php");
+    include("nav.php");
     $user= $_SESSION['username1'];
     // echo($user);
     $sql = "Select * from `registration` where Reg_no = '$user'";
@@ -36,6 +38,8 @@
     $status=$row['status'];
     $Reward=$row['Reward'];
     ?>
+      <div class="profile-container">
+        <h1 style=" padding-bottom: 20px;">Profile Section</h1>
          <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
           <div class="user-details">
         
@@ -113,5 +117,49 @@
 
          
         </form>
+</div>
+        <style>
+            /* Add these styles to your existing styles.css file */
+
+/* Profile Section styles */
+.profile-container {
+    margin-left: 220px; /* Adjust based on your side navigation width */
+    padding: 20px;
+}
+.h1{
+    
+}
+
+.user-details {
+    margin-top:20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.input-box {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.details {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+@media (max-width: 1024px) {
+    .profile-container {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .user-details {
+        grid-template-columns: 1fr;
+    }
+}
+
+        </style>
 </body>
 </html>

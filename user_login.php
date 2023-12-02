@@ -3,91 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            font-family: 'Arial', sans-serif;
             display: flex;
-            align-items: center;
-            justify-content: center;
             height: 100vh;
         }
 
-        .login-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: center;
+        .left-side {
+            flex: 0 0 60%;
+            background: url('asset/image.jpeg') center/cover no-repeat; /* Replace 'your-image-url.jpg' with your image URL */
+            position: relative;
         }
 
-        h2 {
-            margin-bottom: 20px;
-            color: #333;
+        .right-side {
+            flex: 0 0 40%;
+            padding: 2px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #f4f4f4; /* or any other background color you prefer */
         }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        input {
+        .login-form {
+            max-width: 400px;
             width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
+            background: #fff; 
+            border-radius: 8px;
+            padding: 20px;
+            flex: 0 0 40%;
+            padding: 5px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #f4f4f4; /* or any other background color you prefer */
+        }
+
+        .login-form h1.name {
+            text-align: left;
+        }
+
+        .login-form h3 {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .login-form span {
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            margin-top:10px;
             box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
 
-        input[type="submit"] {
-            background-color: #4caf50;
+        .login-form button {
+            width: 30%;
+            margin-top:10px;
+            padding: 10px;
+            background: #36e685; /* or any other button color you prefer */
             color: #fff;
+            border: none;
+            border-radius: 20px;
             cursor: pointer;
         }
 
-        input[type="submit"]:hover {
-            background-color: #45a049;
+        .login-form .links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
         }
 
-        .message {
-            margin-top: 16px;
-            color: #e74c3c;
+        .login-form .links a {
+            text-decoration: none;
+            color: #c1184ae6;
+        }
+
+        .login-form input[type="checkbox"] {
+            margin-right: 8px; /* Adjust spacing as needed */
+        }
+
+        .social-buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-buttons button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #4285f4; /* Google blue color */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
     </style>
+    <title>Login Page</title>
 </head>
 <body>
 
-    <div class="login-container">
-        <h2>User Login</h2>
+<div class="left-side"></div>
+    <div class="right-side">
+        <div class="login-form">
+            
+  
+            <h1 class="name">Welcome!</h1>
+            <h3>Please login to your account.</h3>
+            <form method ="POST" action ="user_login.php">
+                <span>Username</span>
+                <input type="text" name = "username" id = "username" placeholder="" required>
+                <span>Password</span>
+                <input type="password" name = "password" id = "password" c:\xampp\htdocs\front end designs\image.jpegplaceholder="" required>
+                
+                <button type="submit">Login</button>
+            </form>
 
-        <form action="#" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+            <div class="links">
+                <a href="#">Forgot Password?</a>
+                
+            </div>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+       
 
-            <input type="submit" value="Login">
-            <p>Not Registered yet? <a href="user_home.php"> Click Here</a></p>
-        </form>
-
-        <div class="message">
-            <!-- You can use this div to display error messages if needed -->
+            <div class="links">
+                <p>Don't have an account? <a href="user_register.php">Sign up</a></p>
+            </div>
         </div>
     </div>
 
 </body>
 <?php
-$login =false;
-$error=false;
-$num1=Null;
-$num=Null;
+ $login =false;
+ $error=false;
+ $num1=Null;
+ $num=Null;
 
 include("db.php");
 if($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -122,7 +186,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 
 ?>
-  <?php
+<?php
+ 
                 if($error && $num1!=0){
                 echo '<div class="alert">
                     <span class="clsbtn">&times;</span>
@@ -146,4 +211,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                 }
                    
                 ?>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+ 
+</body>
 </html>

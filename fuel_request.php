@@ -9,7 +9,7 @@
     <title>fuel_request</title>
 </head>
 <body>
-    <h1> Request for Fuel </h1>
+    <!-- <h1> Request for Fuel </h1> -->
     <?php
     
     session_start();
@@ -21,9 +21,9 @@
     }
     
     $user= $_SESSION['username1'];
-    echo($user);
+    // echo($user);
     include('db.php');
-
+    include('nav.php');
     $sql = "Select account_balance,name from registration where Reg_no = '$user'";
     $result = mysqli_query($conn,$sql);
     $row = mysqli_fetch_array($result);
@@ -31,9 +31,10 @@
     $name = $row['name'];
 
     ?>
-      
+      <div class="form-container">
         <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-                <div class="input-box">
+          <h2 class="request-fuel-heading">Request Fuel</h2>
+          <div class="input-box">
                     <span class="details">Full Name <?php
                     echo ": $name";?></span>
                 </div>
@@ -45,18 +46,45 @@
                     <span class="details"> Account Balance<?php
                     echo ": $account_balance";?></span>
                 </div>
-
-        <!-- Amount input -->
-        <label for="amount">Amount:</label>
+                    <div class="input-box">
+                        <label for="value">Select the Quantity</label>
+                      <select name="value" id="value">
+                      <option >  </option>
+                        <option value="amount">Amount</option>
+                        <option value="liters">Liters</option>
+                        </select>
+                  </div>
+                <div class="input-box">
+                 
+          <label for="amount">Enter the Quantity:</label>
         <input type="text" name="amount" id="amount"><br>
-
-        <!-- Fuel input -->
-        <label for="fuel">Fuel:</label>
-        <input type="text" name="fuel" id="fuel"><br>
+                </div>
+                
+      
+          <!-- Amount input -->
+         
 
         <!-- Submit button -->
         <input type="submit" value="Submit">
     </form>
+    </div>
+    <div class="add-money-section">
+    <h2 class="request-fuel-heading">Add Money</h2>
+    <div class="money-cards">
+      <div class="money-card" onclick="setMoney(500)">500</div>
+      <div class="money-card" onclick="setMoney(1000)">1000</div>
+      <div class="money-card" onclick="setMoney(5000)">5000</div>
+      <div class="money-card" onclick="setMoney(10000)">10000</div>
+    </div>
+    <input type="text" name="money" id="money" class="money-input" placeholder="Enter amount">
+    <input type="submit"  onclick = abcd() value="Add Money">
+</div>
+
+<script>
+    function setMoney(amount) {
+        document.getElementById('money').value = amount;
+    }
+</script>
     <?php
         $amount = null;
         $fuel = null;
@@ -65,22 +93,22 @@
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Check if amount is entered
             
-            if (!empty($_POST["amount"])) {
+            if (($_POST["value"])=='amount') {
                 $amount = $_POST["amount"];
                 $fuel = NULL;
                 $sql_amnt ="UPDATE `registration` SET `req_fuel` = '$fuel',req_fuel_amnt='$amount' WHERE `registration`.`Reg_no` = '$user'";
                 mysqli_query($conn,$sql_amnt);
                 echo ("You have requested a fuel of ".$amount."Rs");
             } 
-            elseif (!empty($_POST["fuel"])) { // Check if fuel is entered
-                $fuel = $_POST["fuel"];
+            elseif (($_POST["fuel"])=='liters') { // Check if fuel is entered
+                $fuel = $_POST["amount"];
                 $amount = Null;
                 $sql_fuel ="UPDATE `registration` SET `req_fuel` = '$fuel',req_fuel_amnt='$amount' WHERE `registration`.`Reg_no` = '$user'";
                 mysqli_query($conn,$sql_fuel);
                 echo ("You have requested a fuel of ".$fuel."liters" );
             }
         }
-        echo "<button onclick = abcd('$user')>Add Money</button>";
+        // echo "<button onclick = abcd('$user')>Add Money</button>";
         ?>
    
    <script>
@@ -130,5 +158,100 @@
     }
    </script>
 
+<style>
+      
+         .form-container,
+        .add-money-section {
+            width: 100%;
+            max-width: 900px;
+         margin-left: 430px;
+         margin-top:0px;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .input-box {
+            margin-bottom: 15px;
+        }
+
+        .details {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .add-money-section {
+            margin-top: 30px;
+        }
+
+        .money-input {
+            width: 60%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .money-cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.money-card {
+    flex-basis: 23%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.money-card:hover {
+    background-color: #3498db; /* Blue color on hover */
+    color: white; /* Text color on hover */
+}
+
+/* Add some space between the money cards */
+.money-card + .money-card {
+    margin-left: 10px;
+}
+        
+        .request-fuel-heading {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
 </body>
 </html>

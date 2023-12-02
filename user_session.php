@@ -1,5 +1,3 @@
-
-
 <?php
 $reg ='null';
 $reg =$_POST['Reg_no'];
