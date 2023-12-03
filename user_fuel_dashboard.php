@@ -67,14 +67,14 @@ table tbody tr:hover {
     session_start();
     
     if(!isset($_SESSION['user'])||$_SESSION['user']!= true ){
-       header("location:index.php"); 
+       header("location:user_login.php"); 
        exit();
        
     }
     
     $user= $_SESSION['username1'];
     // echo($user);
-    include('db.php');
+    include('dbconnect.php');
     include('nav.php');
 
     $sql = "Select Fuel_used,tank_capacity,name from registration where Reg_no = '$user'";

@@ -15,14 +15,14 @@
     session_start();
     
     if(!isset($_SESSION['user'])||$_SESSION['user']!= true ){
-       header("location:index.php"); 
+       header("location:user_login.php"); 
        exit();
        
     }
     
     $user= $_SESSION['username1'];
     // echo($user);
-    include('db.php');
+    include('dbconnect.php');
     include('nav.php');
     $sql = "Select account_balance,name from registration where Reg_no = '$user'";
     $result = mysqli_query($conn,$sql);
@@ -67,17 +67,19 @@
         <!-- Submit button -->
         <input type="submit" value="Submit">
     </form>
+   
     </div>
     <div class="add-money-section">
-    <h2 class="request-fuel-heading">Add Money</h2>
-    <div class="money-cards">
-      <div class="money-card" onclick="setMoney(500)">500</div>
-      <div class="money-card" onclick="setMoney(1000)">1000</div>
-      <div class="money-card" onclick="setMoney(5000)">5000</div>
-      <div class="money-card" onclick="setMoney(10000)">10000</div>
-    </div>
-    <input type="text" name="money" id="money" class="money-input" placeholder="Enter amount">
-    <input type="submit"  onclick = abcd() value="Add Money">
+        <h2 class="request-fuel-heading">Add Money</h2>
+        <div class="money-cards">
+            <div class="money-card" onclick="setMoney(500)">500</div>
+            <div class="money-card" onclick="setMoney(1000)">1000</div>
+            <div class="money-card" onclick="setMoney(5000)">5000</div>
+            <div class="money-card" onclick="setMoney(10000)">10000</div>
+        </div>
+        <input type="text" name="money" id="money" class="money-input" placeholder="Enter amount">
+        <!-- Embed $user in the onclick attribute -->
+        <input type="button" onclick="abcd('<?php echo $user; ?>')" value="Add Money">
 </div>
 
 <script>
@@ -98,23 +100,28 @@
                 $fuel = NULL;
                 $sql_amnt ="UPDATE `registration` SET `req_fuel` = '$fuel',req_fuel_amnt='$amount' WHERE `registration`.`Reg_no` = '$user'";
                 mysqli_query($conn,$sql_amnt);
-                echo ("You have requested a fuel of ".$amount."Rs");
+                echo ("<script>alert('You have requested a fuel of $amount.Rs')</script>");
             } 
-            elseif (($_POST["fuel"])=='liters') { // Check if fuel is entered
+            elseif (($_POST["value"])=='liters') { // Check if fuel is entered
                 $fuel = $_POST["amount"];
                 $amount = Null;
                 $sql_fuel ="UPDATE `registration` SET `req_fuel` = '$fuel',req_fuel_amnt='$amount' WHERE `registration`.`Reg_no` = '$user'";
                 mysqli_query($conn,$sql_fuel);
-                echo ("You have requested a fuel of ".$fuel."liters" );
+                echo ("<script>alert('You have requested a fuel of $fuel.liters')</script>");
             }
         }
         // echo "<button onclick = abcd('$user')>Add Money</button>";
         ?>
    
    <script>
-    function abcd(uname){
-    let amt = prompt("Please enter the ammount you wish to add" );
-    // console.log(value,user);
+    
+ 
+function abcd(uname){
+    let amt = document.getElementById("money").value;
+
+// Do something with the input value (example: alert it)
+alert("Adding money: " + amt);
+// console.log(value,user);
     amt = amt*100;
     var options = {
     key: "rzp_test_ed8WeGcGzOe4x5",
@@ -164,7 +171,7 @@
         .add-money-section {
             width: 100%;
             max-width: 900px;
-         margin-left: 430px;
+         margin-left: 260px;
          margin-top:0px;
             padding: 10px;
             background-color: white;
@@ -197,6 +204,14 @@
         }
 
         input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="button"] {
             background-color: #4caf50;
             color: white;
             padding: 10px 15px;

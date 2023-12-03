@@ -3,7 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
+    <title>Login Page</title>
+  
+</head>
+<body>
+<?php
+$login =false;
+$error=false;
+$num1=Null;
+$num=Null;
+
+include("dbconnect.php");
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    // echo($username."\t" .$password);
+  
+    $sql1= "SELECT * FROM `login` WHERE user_name='$username' AND user_type='user'";
+    $result1=mysqli_query($conn,$sql1);
+    $num1 = mysqli_num_rows($result1);
+    if($num1==0){
+        $showPopup = true; // Replace this condition with your own logic
+
+        if ($showPopup) {
+            // echo '<div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #f0f0f0; padding: 20px; border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 9999;">
+            //         <p>Username  not found Kindly Register by  <a href="user_home.php"> Clicking Here</a></p>
+            //       </div>';
+        
+            // // Trigger the JavaScript function to show the popup
+            // echo '<script>showPopup();</script>';
+        }
+        
+    }
+    else{
+    $sql= "SELECT * FROM `login` WHERE user_name='$username' AND password='$password'";
+    $result=mysqli_query($conn,$sql);
+    $num= mysqli_num_rows($result);
+    }
+  
+    if($num==1){
+        $login=true;
+        session_start();
+        $_SESSION['user']=true;
+        $_SESSION['username']="$username";
+       
+     
+    }else{ $error=true;}
+    
+       
+    
+}
+
+
+?>
+
+
+
+<div class="left-side"></div>
+    <div class="right-side">
+        <div class="login-form">
+        <?php
+if ($error && $num == 0) {
+    ' <div class="alert success">
+    <span class="clsbtn">&times;</span>
+    <strong>Student Registerd Sucessfully</strong>
+    </div>';
+}
+
+if ($login) {
+    ' <div class="alert success">
+        <span class="clsbtn">&times;</span>
+        <strong>Student Registerd Sucessfully</strong>
+        </div>';
+
+    echo "<script>
+            setTimeout(function() {
+                window.location.href = 'user_vehicle_register.php';
+            }, 2000);
+          </script>";
+}
+?>
+  
+            <h1 class="name">Welcome!</h1>
+            <h3>Please login to your account.</h3>
+            <form method ="POST" action ="#">
+                <span>Username</span>
+                <input type="text" name = "username" id = "username" required>
+                <span>Password</span>
+                <input type="password" name = "password" id = "password" required>
+                
+                <button type="submit">Login</button>
+            </form>
+
+            <div class="links">
+                <a href="#">Forgot Password?</a>
+                
+            </div>
+
+       
+
+            <div class="links">
+                <p>Don't have an account? <a href="user_register.php">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+ 
+
+<style>
         body {
             margin: 0;
             padding: 0;
@@ -14,8 +123,7 @@
 
         .left-side {
             flex: 0 0 60%;
-            background: url('asset/image.jpeg') center/cover no-repeat; /* Replace 'your-image-url.jpg' with your image URL */
-            position: relative;
+            background: url('asset/image.jpeg') center/cover no-repeat;             position: relative;
         }
 
         .right-side {
@@ -112,113 +220,53 @@
             border-radius: 4px;
             cursor: pointer;
         }
+        #popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #f0f0f0;
+        padding: 20px;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 9999;
+    }
+
+    .alert {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        padding: 15px;
+        background-color: #4CAF50;
+        color: white;
+        text-align: center;
+        z-index: 9999;
+    }
+
+    .alert.success {
+        background-color: #4CAF50;
+    }
+
+    .clsbtn {
+        color: white;
+        float: right;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+    }
     </style>
-    <title>Login Page</title>
-</head>
-<body>
-
-<div class="left-side"></div>
-    <div class="right-side">
-        <div class="login-form">
-            
-  
-            <h1 class="name">Welcome!</h1>
-            <h3>Please login to your account.</h3>
-            <form method ="POST" action ="user_login.php">
-                <span>Username</span>
-                <input type="text" name = "username" id = "username" placeholder="" required>
-                <span>Password</span>
-                <input type="password" name = "password" id = "password" c:\xampp\htdocs\front end designs\image.jpegplaceholder="" required>
-                
-                <button type="submit">Login</button>
-            </form>
-
-            <div class="links">
-                <a href="#">Forgot Password?</a>
-                
-            </div>
-
-       
-
-            <div class="links">
-                <p>Don't have an account? <a href="user_register.php">Sign up</a></p>
-            </div>
-        </div>
-    </div>
-
-</body>
-<?php
- $login =false;
- $error=false;
- $num1=Null;
- $num=Null;
-
-include("db.php");
-if($_SERVER["REQUEST_METHOD"]=="POST"){
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    // echo($username."\t" .$password);
-  
-    $sql1= "SELECT * FROM `login` WHERE user_name='$username' AND user_type='user'";
-    $result1=mysqli_query($conn,$sql1);
-    $num1 = mysqli_num_rows($result1);
-    if($num1==0){
-        echo "Username  not found Kindly Register by  <a href='user_home.php'> Clicking Here</a>";
-    }
-    else{
-    $sql= "SELECT * FROM `login` WHERE user_name='$username' AND password='$password'";
-    $result=mysqli_query($conn,$sql);
-    $num= mysqli_num_rows($result);
-    }
-  
-    if($num==1){
-        $login=true;
-        session_start();
-        $_SESSION['user']=true;
-        $_SESSION['username']="$username";
-       
-     
-    }else{ $error=true;}
-    
-       
-    
-}
-
-
-?>
-<?php
- 
-                if($error && $num1!=0){
-                echo '<div class="alert">
-                    <span class="clsbtn">&times;</span>
-                    <strong>Invaild Credentials  </strong>Check and try again.
-                </div>';
-               
-                
-                }
-                if($login)
-                {
-                    echo ' <div class="alert success">
-                    <span class="clsbtn">&times;</span>
-                    <strong>You are logged in</strong>
-                    </div>';
-                   
-                    echo "<script>
-                    setTimeout(function() {
-                        window.location.href = 'user_landing.php';
-                    }, 2000);
-                  </script>";
-                }
-                   
-                ?>
-</html>
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<body>
- 
-</body>
+      <script>
+        // Function to display the popup message and hide it after 10 seconds
+        function showPopup() {
+            var popup = document.getElementById('popup');
+            popup.style.display = 'block';
+            setTimeout(function () {
+                popup.style.display = 'none';
+            }, 10000); // 10000 milliseconds = 10 seconds
+        }
+    </script>
 </html>

@@ -28,7 +28,7 @@
     
     // $user= $_SESSION['username1'];
     // echo($user);
-    include('db.php');
+    include('dbconnect.php');
 
 
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fuel Usage</title>
+    <title>Documents</title>
     
  
             
@@ -14,14 +14,14 @@
     session_start();
     
     if(!isset($_SESSION['user'])||$_SESSION['user']!= true ){
-       header("location:index.php"); 
+       header("location:user_login.php"); 
        exit();
        
     }
     
     $user= $_SESSION['username1'];
     // echo($user);
-    include('db.php');
+    include('dbconnect.php');
     include('nav.php');
 
     $sql = "Select  File_type,Submitted_date,verified_date,File_status from documents where Reg_no = '$user' and File_type= 'pollution_certifcate' ORDER BY verified_date  DESC";
@@ -118,7 +118,7 @@
 </div>
     <?php
 // MySQL Database Configuration
-include("db.php");
+include("dbconnect.php");
 // Check connection
 $type=Null;
 // Check if a file was submitted

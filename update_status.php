@@ -1,5 +1,5 @@
 <?php
-include("db.php");
+include("dbconnect.php");
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $status=$_POST['status'];
     $Reg_no=$_POST['Reg_no'];

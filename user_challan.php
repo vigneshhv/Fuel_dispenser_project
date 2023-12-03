@@ -65,6 +65,14 @@ table tbody tr:nth-child(even) {
 table tbody tr:hover {
     background-color: #ecf0f1;
 }
+.blue-button {
+            background-color:orange ;
+            color: white; /* Text color */
+            padding: 10px 20px; /* Adjust padding as needed */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Optional: Add rounded corners */
+            cursor: pointer; /* Change cursor on hover */
+        }
 
 </style>
     
@@ -73,14 +81,14 @@ table tbody tr:hover {
     session_start();
     
     if(!isset($_SESSION['user'])||$_SESSION['user']!= true ){
-       header("location:index.php"); 
+       header("location:user_login.php"); 
        exit();
        
     }
     
     $user= $_SESSION['username1'];
     // echo($user);
-    include('db.php');
+    include('dbconnect.php');
     include('nav.php');
     $sql = "Select account_balance,name from registration where Reg_no = '$user'";
     $result = mysqli_query($conn,$sql);
@@ -130,7 +138,7 @@ table tbody tr:hover {
                         <td>".$row['Reason']."</td>
                         <td>".$row['Ammount']."</td>
                        
-                        <td><button type ='submit'  onclick=\"updateStatus('".$row['Ammount']."', '".$row['Challan_Id']."')\">Pay</button></td>
+                        <td><button type ='submit' class='blue-button'  onclick=\"updateStatus('".$row['Ammount']."', '".$row['Challan_Id']."')\">Pay</button></td>
                     </tr>   ");
                     $count++;
                     }
@@ -139,7 +147,7 @@ table tbody tr:hover {
   ?>
     </tbody>
 </table>
-  <h1>Payed challans</h1>
+  <h1 style=" padding:20px">Payed challans</h1>
   <table class="table table-primary">
                 <thead>
                             <th scope = "col">SL No.</th>
@@ -148,7 +156,6 @@ table tbody tr:hover {
                             <th scope = "col">Challan Type</th>
                             <th scope = "col">Challan Reason</th>
                             <th scope = "col"> Amount payed</th>
-    
                             <th scope = "col">Payment Date</th>
                             
                             </tr>
@@ -163,7 +170,7 @@ table tbody tr:hover {
    while( $row1 =mysqli_fetch_assoc($result1)){
     echo("
     <tr>
-    <th scope='row'>".$count."</th>
+ 
     <td>".$count."</td>
     <td>".$row1['Challan_Id']."</td>
     <td>".$row1['challan_ date']."</td>

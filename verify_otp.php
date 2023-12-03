@@ -1,6 +1,6 @@
 <?php
 // verify_otp.php
-include 'db.php';
+include 'dbconnect.php';
 // Start the session
 session_start();
 
@@ -14,9 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $enteredOtp = $_POST['otp'];
         $storedOtp = $_SESSION['otp'];
         $otpTime = $_SESSION['otp_time'];
+        echo($enteredOtp.$storedOtp.$otpTime.time());
 
         // Check if OTP is correct and within the 2-minute timeframe
-        if ($enteredOtp == $storedOtp && (time() - $otpTime) <= 120) {
+        if ($enteredOtp == $storedOtp && (time() - $otpTime) <= 120) 
+            {
             // OTP is valid, set the verification result
             $verificationResult = 1;
           
@@ -25,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             // Invalid OTP, set the verification result
             $verificationResult = 3;
+            echo "Invalid OTP";
         }
 
         // Unset the OTP session variables to prevent reuse
@@ -39,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['verification_result'] = $verificationResult;
 
     // Redirect to user_landing.php
-   header('Location:user_landing.php');
-    exit();
+   header('Location:user_vehicle_register.php');
+    // exit();
 }
 ?>

@@ -6,58 +6,58 @@
     <title>Transactions</title>
 </head>
 <style>
-    body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #2c3e50;
-            color: #ecf0f1;
-        }
+ .main-content {
+  padding:20px;
+    margin-left: 230px;
+}
 
-        header {
-            background-color: #3498db;
-            color: #fff;
-            text-align: center;
-            padding: 1em;
-        }
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
 
-        main {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #ecf0f1;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+.input-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
 
-        section {
-            margin-bottom: 20px;
-        }
+.details {
+    font-size: 18px;
+    font-weight: bold;
+}
+   /* Add a box shadow to input boxes */
+ .input-box {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        padding: 6px;
+        border-radius: 5px;
+    }
 
-        h2 {
-            color: #333;
-        }
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
+table th, table td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
 
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            color:black;
-        }
+.h1{
+  padding: 10px;
+}
 
-        th {
-            background-color: #f2f2f2;
-        }
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
 
-        tr:hover {
-            background-color: #f5f5f5;
-        }
+table tbody tr:hover {
+    background-color: #ecf0f1;
+}
 
 </style>
 <body>
@@ -70,35 +70,32 @@
            exit();
            
         }
-        include("db.php");
+        include("dbconnect.php");
+        include('nav.php');
         $user= $_SESSION['username1'];
         $name=$_SESSION['name'];
     ?>
      <header>
-        <h1>Transaction History</h1>
-    </header>
-    <div class="input-box">
-                    <span class="details">Full Name <?php
-                    echo ": $name";?></span>
-                    </div>
-
-                    <div class="input-box">
-                    <span class="details">Registration Number <?php
-                    echo ": $user";?></span>
-                    </div>
+         </header>
+         <div class ="main-content">
+             <div class = "container">
+                 <h1>Transaction History</h1>
     <main>
     <section>
             <!-- <h2></h2> -->
-            <table>
+         
+   
+                <h1> </h1>
+               
+                <table class="table table-primary">
                 <thead>
-                    <tr>
-                        <th>SL.no</th>
-                        <th>Rference ID</th>
-                        <th>Amount</th>
-                        <th>Transaction ID</th>
-                        <th>Transaction Date</th>
-                        <th>Reason</th>
-                    </tr>
+                        <th scope = "col">SL.no</th>
+                        <th scope = "col">Rference ID</th>
+                        <th scope = "col">Amount</th>
+                        <th scope = "col">Transaction ID</th>
+                        <th scope = "col">Transaction Date</th>
+                        <th scope = "col">Reason</th>
+                        </tr>
                 </thead>
                 <tbody>
                 <?php
@@ -123,7 +120,7 @@
                         $row['Reason']="Ammount is added to account";
                     }
                         echo("
-                        <table>
+                        
                         <tr>
                         <td>".$count."</td>
                         <td>".$row['refence_id']."</td>
@@ -132,23 +129,26 @@
                         <td>".$row['time']."</td>
                         <td>".$row['Reason']."</td>
                        
-                        </td>
+                        
                          
                        
                        
 
-                    </tr>   </table>");
+                    </tr> ");
                     $count++;
                     
                   }
                 }
             
                 else{
-                    echo "no vehicles are listed";
+                    echo "no Transaction details are available as of now";
                 }?>
                     <!-- Display registered vehicles' IDs here -->
                 </tbody>
             </table>
+
         </section>
+        </div>
+        </div>
 </body>
 </html>
