@@ -24,11 +24,12 @@
     // echo($user);
     include('dbconnect.php');
     include('nav.php');
-    $sql = "Select account_balance,name from registration where Reg_no = '$user'";
+    $sql = "Select account_balance,name,Phone from registration where Reg_no = '$user'";
     $result = mysqli_query($conn,$sql);
     $row = mysqli_fetch_array($result);
     $account_balance=$row['account_balance'];
     $name = $row['name'];
+    $number = $row['Phone'];
 
     ?>
       <div class="form-container">
@@ -100,14 +101,67 @@
                 $fuel = NULL;
                 $sql_amnt ="UPDATE `registration` SET `req_fuel` = '$fuel',req_fuel_amnt='$amount' WHERE `registration`.`Reg_no` = '$user'";
                 mysqli_query($conn,$sql_amnt);
-                echo ("<script>alert('You have requested a fuel of $amount.Rs')</script>");
+                echo ("You have requested a fuel of $amount.Rs");
+             $phone_number =  $number; // Example phone number
+              $message = "You have requested a fuel of $amount.Rs" ; // Example message
+              
+              require_once __DIR__ . '/vendor/autoload.php';
+              $number = "+".$phone_number;
+              
+              // Set your Twilio account information
+              $accountSid = 'AC47a342d10cb52e2182cedeef8df2b712';
+              $authToken = '35d8866ecbc4b1ab529a03e63c90bba1';
+              $twilioNumber = '+16592562703';
+      
+              // Set the recipient's phone number and the message body
+              $recipientNumber = $number;
+              
+      
+              // Create a new Twilio client
+              $client = new Twilio\Rest\Client($accountSid, $authToken);
+      
+              // Send the SMS message
+              $client->messages->create(
+                $recipientNumber,
+                array(
+                  'from' => $twilioNumber,
+                  'body' => $message
+                )
+              );
+               
             } 
             elseif (($_POST["value"])=='liters') { // Check if fuel is entered
                 $fuel = $_POST["amount"];
                 $amount = Null;
                 $sql_fuel ="UPDATE `registration` SET `req_fuel` = '$fuel',req_fuel_amnt='$amount' WHERE `registration`.`Reg_no` = '$user'";
                 mysqli_query($conn,$sql_fuel);
-                echo ("<script>alert('You have requested a fuel of $fuel.liters')</script>");
+                echo ("You have requested a fuel of $fuel.liters");
+                $phone_number =  $number; // Example phone number
+                $message = "You have requested a fuel of $fuel.liters" ; // Example message
+                
+                require_once __DIR__ . '/vendor/autoload.php';
+                $number = "+".$phone_number;
+                
+                // Set your Twilio account information
+                $accountSid = 'AC47a342d10cb52e2182cedeef8df2b712';
+                $authToken = '35d8866ecbc4b1ab529a03e63c90bba1';
+                $twilioNumber = '+16592562703';
+        
+                // Set the recipient's phone number and the message body
+                $recipientNumber = $number;
+                
+        
+                // Create a new Twilio client
+                $client = new Twilio\Rest\Client($accountSid, $authToken);
+        
+                // Send the SMS message
+                $client->messages->create(
+                  $recipientNumber,
+                  array(
+                    'from' => $twilioNumber,
+                    'body' => $message
+                  )
+                );
             }
         }
         // echo "<button onclick = abcd('$user')>Add Money</button>";

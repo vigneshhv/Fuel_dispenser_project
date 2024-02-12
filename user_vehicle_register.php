@@ -135,7 +135,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
               // Generate and send OTP (in a real-world scenario, you would use a service to send the OTP)
               $otp = mt_rand(1000, 9999); // Generate a random 4-digit OTP
               // In a real-world scenario, you would send the OTP to the user's phone number using a messaging service.
-              echo '<br>'.$otp;
+            //   echo '<br>'.$otp;
+              
+              // Your message and phone number data
+              $phone_number =  $number; // Example phone number
+              $message = "High Security pin for registering your vehicle is :".$otp; // Example message
+              
+              require_once __DIR__ . '/vendor/autoload.php';
+              $number = "+".$phone_number;
+              
+              // Set your Twilio account information
+              $accountSid = 'AC47a342d10cb52e2182cedeef8df2b712';
+              $authToken = '35d8866ecbc4b1ab529a03e63c90bba1';
+              $twilioNumber = '+16592562703';
+      
+              // Set the recipient's phone number and the message body
+              $recipientNumber = $number;
+              
+      
+              // Create a new Twilio client
+              $client = new Twilio\Rest\Client($accountSid, $authToken);
+      
+              // Send the SMS message
+              $client->messages->create(
+                $recipientNumber,
+                array(
+                  'from' => $twilioNumber,
+                  'body' => $message
+                )
+              );
+            //   echo "SMS sent to $phone_number successfully!";
+              
+
       
               // Set the OTP and current time in session for verification
               
@@ -189,12 +220,43 @@ if(isset($_SESSION['verification_result'])){
         $sql_user = "update registration set user_name = '$user' where Reg_no= '$Reg_no' "; 
         $result_user = mysqli_query($conn,$sql_user);
         unset($_SESSION['verification_result']);
-        echo "<script>
-        setTimeout(function() {
-            window.location.href = 'user_vehicle_register.php';
-        }, 1000);
-      </script>";
+
+    $sql = "SELECT phone FROM registration where Reg_no ='$Reg_no' ";
+    $result= mysqli_query($conn,$sql);
+    $row = mysqli_fetch_assoc($result);
+    $number = $row['phone'];
+         $phone_number =  $number; // Example phone number
+              $message = "Your vehicle with ".$Reg_no." is successfully registerd with smart Fuel  "; // Example message
+              
+              require_once __DIR__ . '/vendor/autoload.php';
+              $number = "+".$phone_number;
+              
+              // Set your Twilio account information
+              $accountSid = 'AC47a342d10cb52e2182cedeef8df2b712';
+              $authToken = '35d8866ecbc4b1ab529a03e63c90bba1';
+              $twilioNumber = '+16592562703';
       
+              // Set the recipient's phone number and the message body
+              $recipientNumber = $number;
+              
+      
+              // Create a new Twilio client
+              $client = new Twilio\Rest\Client($accountSid, $authToken);
+      
+              // Send the SMS message
+              $client->messages->create(
+                $recipientNumber,
+                array(
+                  'from' => $twilioNumber,
+                  'body' => $message
+                )
+              );
+              echo "<script>
+              setTimeout(function() {
+                  window.location.href = 'user_vehicle_register.php';
+              }, 1000);
+            </script>";
+            
     }
     else if (isset($_SESSION['verification_result'])== 3){
         echo ("Invalid OTP ");
