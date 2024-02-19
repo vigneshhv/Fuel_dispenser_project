@@ -10,7 +10,7 @@
         //validates the order ID sent by the esp32 present in database or not
         $sql = "select ID,amount from fuel where ID= '$id';";
         $result= mysqli_query($conn,$sql);
-        $row = mysqli_fetch_array($result);
+        $row = mysqli_fetch_assoc($result);
         $ammount = $row["amount"];
         if(mysqli_num_rows(mysqli_query($conn,$sql))==1){
             // if the order ID is present in database
@@ -32,11 +32,11 @@
         $sql_reset ="UPDATE `registration` SET `req_fuel` = 0,req_fuel_amnt=0  WHERE `registration`.`RFID_no` = '$rfid_r'";
         mysqli_query($conn,$sql_reset);
        
-        $sql_reg ="SELECT * FROM `registration` where `Reg_no` ='$rfid_r'";
-        $result= mysqli_query($conn,$sql_reg);
-        $row = mysqli_fetch_array($result);
-        $number =$row['Phone'];
-        $balance =$row['account_balance'];
+        $sql_reg ="SELECT * FROM `registration` where `RFID_no` ='$rfid_r'";
+        $result_fetch= mysqli_query($conn,$sql_reg);
+        $row_f = mysqli_fetch_assoc($result_fetch);
+        $number =$row_f['Phone'];
+        $balance =$row_f['account_balance'];
         $phone_number =  $number; // Example phone number
         $message = "you have debited of  the amount of $ammount RS for a fuel request . Current Account Balance is : $balance Rs ,Thank You" ; // Example message
         
@@ -74,3 +74,4 @@
     }
 
     ?>
+  
