@@ -15,7 +15,7 @@
         if(mysqli_num_rows(mysqli_query($conn,$sql))==1){
             // if the order ID is present in database
             //then checks the status flag sent by esp32 is true or not
-        if($status == TRUE){
+        if($status == 1){
             //it updates the status in fuel database
         $sql_id = "UPDATE `fuel` SET `status` = '$status' WHERE `ID` = '$id' "; 
         mysqli_query($conn,$sql_id);

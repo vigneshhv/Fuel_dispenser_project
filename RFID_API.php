@@ -43,12 +43,7 @@
                  $result1=  mysqli_query($conn, $sql_id);
                  $row1=mysqli_fetch_assoc($result1);
  
-                 echo($row['RFID_no']);//send post to esp32
-                 echo('<br>');
-                  echo($row['req_fuel']);//send post to esp32
-                  echo('<br>');
-                  echo($row['Fuel_used']);//send post to esp32
-                //parametes are sent back to the ep32 for processing
+              
                  $response = array(
                     "uid" => $row['RFID_no'],
                     "fuelamt" => $row['req_fuel'],
@@ -93,12 +88,6 @@
                 $result1=  mysqli_query($conn, $sql_id);
                 $row1=mysqli_fetch_assoc($result1);
 
-                echo ($row['RFID_no']);//send post to esp32
-                echo('<br>');
-                echo($value);//send post to esp32
-                echo('<br>');//send post to esp32
-                echo($row['Fuel_used']);
-                echo('<br>'.$row1['ID']);
                 $response = array(
                     "uid" => $row['RFID_no'],
                     "fuelamt" => $value,

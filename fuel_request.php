@@ -22,7 +22,7 @@
     
     $user= $_SESSION['username1'];
     // echo($user);
-    include('dbconnect.php');
+    include "dbconnect.php";
     include('nav.php');
     $sql = "Select account_balance,name,Phone from registration where Reg_no = '$user'";
     $result = mysqli_query($conn,$sql);
@@ -30,8 +30,8 @@
     $account_balance=$row['account_balance'];
     $name = $row['name'];
     $number = $row['Phone'];
-
     ?>
+     
       <div class="form-container">
         <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
           <h2 class="request-fuel-heading">Request Fuel</h2>
@@ -68,26 +68,6 @@
         <!-- Submit button -->
         <input type="submit" value="Submit">
     </form>
-   
-    </div>
-    <div class="add-money-section">
-        <h2 class="request-fuel-heading">Add Money</h2>
-        <div class="money-cards">
-            <div class="money-card" onclick="setMoney(500)">500</div>
-            <div class="money-card" onclick="setMoney(1000)">1000</div>
-            <div class="money-card" onclick="setMoney(5000)">5000</div>
-            <div class="money-card" onclick="setMoney(10000)">10000</div>
-        </div>
-        <input type="text" name="money" id="money" class="money-input" placeholder="Enter amount">
-        <!-- Embed $user in the onclick attribute -->
-        <input type="button" onclick="abcd('<?php echo $user; ?>')" value="Add Money">
-</div>
-
-<script>
-    function setMoney(amount) {
-        document.getElementById('money').value = amount;
-    }
-</script>
     <?php
         $amount = null;
         $fuel = null;
@@ -102,7 +82,7 @@
                 $sql_amnt ="UPDATE `registration` SET `req_fuel` = '$fuel',req_fuel_amnt='$amount' WHERE `registration`.`Reg_no` = '$user'";
                 mysqli_query($conn,$sql_amnt);
                 echo ("You have requested a fuel of $amount.Rs");
-             $phone_number =  $number; // Example phone number
+$phone_number =  $number; // Example phone number
               $message = "You have requested a fuel of $amount.Rs" ; // Example message
               
               require_once __DIR__ . '/vendor/autoload.php';
@@ -128,7 +108,6 @@
                   'body' => $message
                 )
               );
-               
             } 
             elseif (($_POST["value"])=='liters') { // Check if fuel is entered
                 $fuel = $_POST["amount"];
@@ -136,7 +115,7 @@
                 $sql_fuel ="UPDATE `registration` SET `req_fuel` = '$fuel',req_fuel_amnt='$amount' WHERE `registration`.`Reg_no` = '$user'";
                 mysqli_query($conn,$sql_fuel);
                 echo ("You have requested a fuel of $fuel.liters");
-                $phone_number =  $number; // Example phone number
+ $phone_number =  $number; // Example phone number
                 $message = "You have requested a fuel of $fuel.liters" ; // Example message
                 
                 require_once __DIR__ . '/vendor/autoload.php';
@@ -166,6 +145,27 @@
         }
         // echo "<button onclick = abcd('$user')>Add Money</button>";
         ?>
+   
+    </div>
+    <div class="add-money-section">
+        <h2 class="request-fuel-heading">Add Money</h2>
+        <div class="money-cards">
+            <div class="money-card" onclick="setMoney(500)">500</div>
+            <div class="money-card" onclick="setMoney(1000)">1000</div>
+            <div class="money-card" onclick="setMoney(5000)">5000</div>
+            <div class="money-card" onclick="setMoney(10000)">10000</div>
+        </div>
+        <input type="text" name="money" id="money" class="money-input" placeholder="Enter amount">
+        <!-- Embed $user in the onclick attribute -->
+        <input type="button" onclick="abcd('<?php echo $user; ?>')" value="Add Money">
+</div>
+
+<script>
+    function setMoney(amount) {
+        document.getElementById('money').value = amount;
+    }
+</script>
+   
    
    <script>
     
