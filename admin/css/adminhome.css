@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&family=Heebo:wght@500&display=swap");
+* {
+  font-family: Hedvig Letters Sans;
+}
+.navbar {
+  background-color: #e9bb03 !important;
+}
+.navbar > .nav-item > a {
+  color: black !important;
+  font-weight: 800 !important;
+}
+body > h1 {
+  text-align: center;
+  padding: 20px;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: rgb(180, 1, 1);
+}
+.mainbox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.petrolbox,
+.dieselbox {
+  width: 50%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dieselbox {
+  border-left: 1px solid black;
+}
+.petrolbox {
+  border-right: 1px solid black;
+}
+
+.fuel_img {
+  margin: 25px 0px;
+  width: 300px;
+  height: 300px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.fuel_img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#dieselamt,
+#petrolamt {
+  margin-bottom: 20px;
+  height: 50px;
+  border: none;
+  border-bottom: 2px solid black;
+}
+#dieselamt:focus {
+  background-color: #e9bb03;
+}
+#petrolamt:focus {
+  background-color: #e9bb03;
+}
+
+label {
+  color: black;
+  font-weight: 800;
+  font-size: 30px;
+}
+.submitbox {
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.submitbox > input {
+  width: 250px;
+  height: 50px;
+  border-radius: 28px;
+  font-size: 30px;
+  background-color: #e9bb03;
+}
+.submitbox > input:hover {
+  background-color: #45a049;
+}
+
+.oldamtbox {
+  margin: 10px auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  border-radius: 20px;
+  height: auto;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.oldamtbox > h2 {
+  font-weight: 900;
+}
+i {
+  color: rgb(180, 1, 1);
+}

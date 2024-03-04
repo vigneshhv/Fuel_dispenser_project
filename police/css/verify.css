@@ -1,0 +1,10 @@
+body {
+  margin-top: 80px;
+}
+body > h1 {
+  text-align: center;
+  text-transform: uppercase;
+}
+.table {
+  margin-top: 25px;
+}

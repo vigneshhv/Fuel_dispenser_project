@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Playpen+Sans:wght@400;500;600&family=Roboto+Condensed:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner:wght@400;500;600;700&family=Lato:wght@400;700&family=Oswald:wght@500&family=Playpen+Sans:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&family=Roboto+Condensed:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Oswald:wght@500&family=Playpen+Sans:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&family=Roboto+Condensed:wght@400;600&display=swap");
+
+body {
+  font-family: Roboto Condensed;
+  background-color: #f4f4f4;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  width: 500px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+input {
+  padding: 8px;
+  margin-bottom: 16px;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+input[type="submit"] {
+  width: 50%;
+  margin: 0px auto;
+  background-color: rgb(98, 242, 98);
+  border: 1px solid black;
+  font-size: 15px;
+}
+
+form > h1 {
+  text-transform: uppercase;
+  margin: 0px auto;
+  margin-bottom: 10px;
+}
+
+form > p > span > a {
+  color: black;
+}

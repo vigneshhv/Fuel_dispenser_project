@@ -1,0 +1,51 @@
+.body {
+  margin-top: 80px !important;
+}
+
+.challan_form {
+  width: 80%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.challan_form > form {
+  margin: 0px auto;
+}
+.challan_form > form > label {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+.challan_form > form > input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: none;
+  border-bottom: 1px solid black;
+}
+.challan_form > form > textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.challan_form > form > select {
+  width: 20%;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  appearance: none;
+}
+
+.challan_form > form > input[type="submit"] {
+  border: 1px solid black;
+  width: 30%;
+  margin: 0px auto;
+  background-color: #fe8901 !important;
+}

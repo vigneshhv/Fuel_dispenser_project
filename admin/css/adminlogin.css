@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&family=Heebo:wght@500&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Hedvig Letters Sans;
+}
+
+.mainbox {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+.mainbox > .leftbox {
+  width: 60%;
+  height: 100vh;
+}
+.mainbox > .leftbox > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mainbox > .rightbox {
+  width: 40%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  width: 50%;
+  height: auto;
+}
+
+.login-container h2 {
+  text-align: center;
+  color: black;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.form-group button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.form-group button:hover {
+  background-color: #45a049;
+}
+
+a {
+  color: black;
+}
