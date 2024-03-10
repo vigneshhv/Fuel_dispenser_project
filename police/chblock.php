@@ -22,7 +22,7 @@ header("Location:./block.php");
 
 
 function send_to_block($rgno,$count){
-    include './dbconnect.php';
+    include '../dbconnect.php';
     if($count>3){
     $add="insert into block(Reg_no,Reason,status) values('$rgno','challan','1')"; 
         $res=$conn->query($add);

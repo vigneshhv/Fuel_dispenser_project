@@ -1,7 +1,7 @@
 <?php
 // view_file.php
 
-include('dbconnect.php');
+include('../dbconnect.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the parameters from the AJAX request
