@@ -103,7 +103,7 @@ if ($login) {
        
 
             <div class="links">
-                <p>Don't have an account? <a href="user_register.php">Sign up</a></p>
+                <p>Don't have an account? <a href="index.php">Sign up</a></p>
             </div>
         </div>
     </div>

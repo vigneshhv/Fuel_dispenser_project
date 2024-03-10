@@ -29,7 +29,7 @@ session_destroy();
         <div class="navright">
           <a href="#home_section">Home</a>
           <a href="#reg_section">Register</a>
-          <a href="./users/user_login.php" id="signin">Sign-In</a>
+          <a href="user_login.php" id="signin">Sign-In</a>
         </div>
       </nav>
     </header>

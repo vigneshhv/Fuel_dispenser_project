@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="user-info">
-        <p style="color: #fff;">Welcome, <span id="user123">Coustmer</span></p>
+        <p style="color: #fff;">Welcome, <span id="user123">Customer</span></p>
         <button onclick="logout()" style="background-color: #ffcc00; color: #333;">Logout</button>
         <div id="clock" style="color: #fff;"></div>
     </div>
